@@ -8,15 +8,12 @@ A deterministic, multi-agent AI system built on the **Mastra framework** designe
 
 ---
 
-┌──────────────────────────────────────────────────────────────────────────────┐
-│     **TL;DR (30-Second Overview)**                                           |
-│  • **What it is:** A Node.js system that answers car dealership questions    │
-│    in natural language.                                                      │
-│  • **How it works:** It converts human questions into SQL queries            │
-│    and fetches real-time data.                                               │
-│  • **Tech Stack:** Mastra framework, SQL Server, and OpenRouter LLMs.        │
-│  • **Architecture:** 4-step sequential workflow with 3 agents and 3 tools.   |            
-└──────────────────────────────────────────────────────────────────────────────┘             
+> [!NOTE]
+> ### 📌 TL;DR
+> * **What it is:** A Node.js backend workflow answering car dealership questions using natural language.
+> * **How it works:** Translates questions into deterministic SQL queries against Microsoft SQL Server.
+> * **Architecture:** 4-step sequential workflow coordinating 3 agents and 3 schema-aware tools.
+> * **Tech Stack:** Mastra, Node.js, Microsoft SQL Server, OpenRouter LLMs.            
 
 ---
 
@@ -24,45 +21,34 @@ A deterministic, multi-agent AI system built on the **Mastra framework** designe
 
 The system executes a strictly typed, 4-stage pipeline that guarantees SQL syntax validity, bounds query parameters to authorized schemas, and filters untrusted or destructive input:
 
-                      User Prompt
-                          │
-                          ▼
-            ┌───────────────────────────┐
-            │ Step 1: Semantic Analysis │
-            │     (guardrailAgent)      │
-            └─────────────┬─────────────┘
-                          │ (Sanitized & Intent Verified)
-                          ▼
-            ┌───────────────────────────┐
-            │   Step 2: SQL Builder     │
-            │       (sqlGenAgent)       │
-            └──────┬──────┬──────┬──────┘
-                   │      │      │
-    ┌──────────────┘      │      └──────────────┐
-    ▼                     ▼                     ▼
-┌───────────────┐  ┌───────────────┐  ┌───────────────────┐
-│  Dealership   │  │    Vehicle    │  │     Regional      │
-│ LocationsTool │  │  CatalogTool  │  │  PromotionsTool   │
-└───────┬───────┘  └───────┬───────┘  └─────────┬─────────┘
-        │                  │                    │
-        └────────────┐     │     ┌──────────────┘
-                     ▼     ▼     ▼
-              [ Extracted Schema Metrics ]
-                           │
-                           ▼
-            ┌───────────────────────────┐
-            │ Step 3: DB Execution      │
-            │   (Safe Driver Engine)    │
-            └─────────────┬─────────────┘
-                          │ (Raw Relational Results)
-                          ▼
-            ┌───────────────────────────┐
-            │ Step 4: Response Format   │
-            │     (responderAgent)      │
-            └─────────────┬─────────────┘
-                          │
-                          ▼
-                Natural Language Answer
+```mermaid
+flowchart TD
+    A([User Prompt]) --> B[Step 1: Semantic Analysis<br/><i>guardrailAgent</i>]
+    
+    B -->|Sanitized & Intent Verified| C[Step 2: SQL Builder<br/><i>sqlGenAgent</i>]
+    
+    C --> D1[DealershipLocationsTool]
+    C --> D2[VehicleCatalogMasterTool]
+    C --> D3[RegionalPromotionsTool]
+    
+    D1 --> E[(Extracted Schema Metrics)]
+    D2 --> E
+    D3 --> E
+    
+    E --> F[Step 3: DB Execution<br/><i>Safe Driver Engine</i>]
+    
+    F -->|Raw Relational Rows| G[Step 4: Response Formatter<br/><i>responderAgent</i>]
+    
+    G --> H([Conversational Answer])
+
+    classDef agent fill:#2d3748,stroke:#4a5568,stroke-width:1px,color:#fff;
+    classDef tool fill:#1a365d,stroke:#2b6cb0,stroke-width:1px,color:#fff;
+    classDef step fill:#1a202c,stroke:#e2e8f0,stroke-width:1px,color:#fff;
+    
+    class B,C,G agent;
+    class D1,D2,D3 tool;
+    class F step;
+```
 
 ---
 
