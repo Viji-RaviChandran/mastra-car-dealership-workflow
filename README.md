@@ -4,11 +4,11 @@
 [![Database: SQL Server](https://img.shields.io/badge/Database-SQL_Server-CC292B.svg)](https://www.microsoft.com/sql-server)
 [![Language: JavaScript](https://img.shields.io/badge/Language-JavaScript-F7DF1E.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-A deterministic, multi-agent AI system built on the **Mastra framework** designed to process natural language queries across complex automotive dealership datasets. The architecture decouples query comprehension, domain-specific metric formulation, schema-aware SQL generation, and contextual response formatting across specialized agents and tools.
+A deterministic, multi-agent AI system built on the **Mastra framework** designed to process natural language queries across automotive dealership datasets. The architecture decouples query comprehension, domain-specific metric formulation, schema-aware SQL generation, and contextual response formatting across specialized agents and tools.
 
 ---
 
-> 
+> [!TIP]
 > ### TL;DR
 > * **What it is:** A Node.js backend workflow answering car dealership questions using natural language.
 > * **How it works:** Translates questions into deterministic SQL queries against Microsoft SQL Server.
@@ -43,9 +43,9 @@ flowchart TD
     
     G --> H([Conversational Answer])
 
-    classDef agent fill:#262626,stroke:#404040,stroke-width:1.5px,color:#fafafa;
-    classDef tool  fill:#171717,stroke:#525252,stroke-width:1.5px,color:#f5f5f5;
-    classDef step  fill:#0a0a0a,stroke:#737373,stroke-width:1.5px,color:#ffffff;
+    classDef agent fill:#1f2937,stroke:#374151,stroke-width:1.5px,color:#f9fafb;
+    classDef tool  fill:#111827,stroke:#4b5563,stroke-width:1.5px,color:#e5e7eb;
+    classDef step  fill:#0f172a,stroke:#64748b,stroke-width:1.5px,color:#f8fafc;
 
     class B,C,G agent;
     class D1,D2,D3 tool;
@@ -87,31 +87,31 @@ The system interfaces with three core relational tables hosted on Microsoft SQL 
 
 ### 1. `dbo.DealershipLocations`
 Stores branch footprints, physical addresses, and operational facility metrics.
-* `LocationID` (PK, int): Unique dealership identifier.
-* `BranchName` (varchar(100)): Dealership branch naming.
-* `StreetAddress` (varchar(150)), `City` (varchar(50)), `StateCode` (char(2)), `PostalCode` (varchar(10)): Geospatial address attributes.
-* `Phone` (varchar(20)), `OperatingLicenseNumber` (varchar(30)): Branch metadata.
-* `ShowroomSqFt` (int), `ServiceBaysCount` (int): Capacity indicators.
-* `OpeningYear` (int): Branch historical tenure.
+* `LocationID`: Unique dealership identifier.
+* `BranchName`: Dealership branch naming.
+* `StreetAddress`, `City`, `StateCode`, `PostalCode`: Geospatial address attributes.
+* `Phone`, `OperatingLicenseNumber`: Branch metadata.
+* `ShowroomSqFt`, `ServiceBaysCount`: Capacity indicators.
+* `OpeningYear`: Branch historical tenure.
 
 ### 2. `dbo.VehicleCatalogMaster`
 Tracks inventory specifications, engineering metrics, and standard pricing.
-* `CatalogID` (PK, int): Unique vehicle listing ID.
-* `Make` (varchar(50)), `Model` (varchar(50)), `ModelYear` (int): Vehicle identification.
-* `VehicleBodyType` (varchar(30)), `Drivetrain` (char(3)), `FuelType` (varchar(20)): Powertrain and chassis layout.
-* `EngineDisplacementLiters` (decimal(3,1)): Engine displacement size.
-* `StandardMSRP` (decimal(10,2)): Base manufacturer retail price.
-* `NHTSASafetyRating` (int): Standardized collision test ratings (1–5).
-* `EPACombinedMPG` (int): Fuel efficiency rating.
+* `CatalogID`: Unique vehicle listing ID.
+* `Make`, `Model`, `ModelYear`: Vehicle identification.
+* `VehicleBodyType`, `Drivetrain`, `FuelType`: Powertrain and chassis layout.
+* `EngineDisplacementLiters`: Engine displacement size.
+* `StandardMSRP`: Base manufacturer retail price.
+* `NHTSASafetyRating`: Standardized collision test ratings (1–5).
+* `EPACombinedMPG`: Fuel efficiency rating.
 
 ### 3. `dbo.RegionalPromotions`
 Maintains promotional marketing campaigns, active financial incentives, and eligibility.
-* `CampaignID` (PK, int): Unique promotional entry ID.
-* `CampaignName` (varchar(100)): Marketing title.
-* `TargetAudienceTier` (varchar(30)), `PromotionalChannel` (varchar(40)): Segmentation rules.
-* `DiscountType` (varchar(20)), `DiscountValue` (decimal(8,2)): Incentive structure.
-* `MinPurchaseRequirement` (decimal(10,2)), `AllocatedBudget` (decimal(12,2)): Financial constraints.
-* `CampaignStartDate` (date), `CampaignEndDate` (date): Validity intervals.
+* `CampaignID`: Unique promotional entry ID.
+* `CampaignName`: Marketing title.
+* `TargetAudienceTier`, `PromotionalChannel`: Segmentation rules.
+* `DiscountType`, `DiscountValue`: Incentive structure.
+* `MinPurchaseRequirement`, `AllocatedBudget`: Financial constraints.
+* `CampaignStartDate`, `CampaignEndDate`: Validity intervals.
 
 ---
 
