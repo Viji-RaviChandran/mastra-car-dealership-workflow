@@ -8,11 +8,11 @@ A deterministic, multi-agent AI system built on the **Mastra framework** designe
 
 ---
 
-> [!NOTE]
-> ### 📌 TL;DR
+> 
+> ### TL;DR
 > * **What it is:** A Node.js backend workflow answering car dealership questions using natural language.
 > * **How it works:** Translates questions into deterministic SQL queries against Microsoft SQL Server.
-> * **Architecture:** 4-step sequential workflow coordinating 3 agents and 3 schema-aware tools.
+> * **Architecture:** 4-step sequential workflow coordinating 3 agents and 3 tools.
 > * **Tech Stack:** Mastra, Node.js, Microsoft SQL Server, OpenRouter LLMs.            
 
 ---
@@ -23,28 +23,30 @@ The system executes a strictly typed, 4-stage pipeline that guarantees SQL synta
 
 ```mermaid
 flowchart TD
-    A([User Prompt]) --> B[Step 1: Semantic Analysis<br/><i>guardrailAgent</i>]
+    A([User Prompt]) --> B[Step 1 <br/>Semantic Analysis: <br/><i>guardrailAgent</i>]
     
-    B -->|Sanitized & Intent Verified| C[Step 2: SQL Builder<br/><i>sqlGenAgent</i>]
+    B -->|Sanitized & Intent Verified| C[Step 2 <br/>SQL Builder: <br/><i>sqlGenAgent</i>]
     
     C --> D1[DealershipLocationsTool]
     C --> D2[VehicleCatalogMasterTool]
     C --> D3[RegionalPromotionsTool]
     
-    D1 --> E[(Extracted Schema Metrics)]
+    D1 --> E[Step 3 <br/>DB Execution<br/><i>Safe Driver Engine</i>]
     D2 --> E
     D3 --> E
     
-    E --> F[Step 3: DB Execution<br/><i>Safe Driver Engine</i>]
+    E --> F[(Extracted Schema Metrics)]
+
     
-    F -->|Raw Relational Rows| G[Step 4: Response Formatter<br/><i>responderAgent</i>]
+    
+    F -->|Raw Relational Rows| G[Step 4 <br/>Response Formatter: <br/><i>responderAgent</i>]
     
     G --> H([Conversational Answer])
 
-    classDef agent fill:#2d3748,stroke:#4a5568,stroke-width:1px,color:#fff;
-    classDef tool fill:#1a365d,stroke:#2b6cb0,stroke-width:1px,color:#fff;
-    classDef step fill:#1a202c,stroke:#e2e8f0,stroke-width:1px,color:#fff;
-    
+    classDef agent fill:#262626,stroke:#404040,stroke-width:1.5px,color:#fafafa;
+    classDef tool  fill:#171717,stroke:#525252,stroke-width:1.5px,color:#f5f5f5;
+    classDef step  fill:#0a0a0a,stroke:#737373,stroke-width:1.5px,color:#ffffff;
+
     class B,C,G agent;
     class D1,D2,D3 tool;
     class F step;
@@ -113,29 +115,6 @@ Maintains promotional marketing campaigns, active financial incentives, and elig
 
 ---
 
-## Directory Layout
-
-```text
-src/mastra/
-├── agents/
-│   ├── guardrailAgent/               # Semantic inspection and prompt safety
-│   ├── sqlGenAgent/                  # Tool-delegating SQL generation agent
-│   └── responderAgent/               # Contextual response synthesizer
-├── tools/
-│   ├── DealershipLocationsTool/      # Schemas, controllers, and metric extractors
-│   ├── RegionalPromotionsTool/       # Promotion & incentive mapping services
-│   └── VehicleCatalogMasterTool/     # Vehicle catalog query controllers
-├── workflow/
-│   └── dealershipworkflow/
-│       ├── schema/                   # Step contract input/output definitions
-│       ├── steps/                    # 4-stage sequential execution steps
-│       └── workflow/                 # Mastra workflow definition
-├── db.js                             # SQL Server connection pooling and driver
-├── model.js                          # LLM provider configurations
-└── index.js                          # Mastra instance entrypoint
-
----
-
 ## Quickstart
 
 ```bash
@@ -150,3 +129,8 @@ npm install
 
 # 4. Start the Mastra playground
 npm run dev
+```
+
+---
+
+Core workflow logic, tools, and agents reside inside src/mastra/
