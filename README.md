@@ -43,10 +43,10 @@ flowchart TD
     
     G --> H([Conversational Answer])
 
-    classDef stepNode fill: #1e3a8a,stroke: #42568d,stroke-width:1.5px,color: #eff6ff;
-    classDef ioNode   fill: #3c66d8,stroke: #6082df,stroke-width:1.5px,color: #eff6ff;
-    classDef toolNode fill: #0f172a,stroke: #202632,stroke-width:1.5px,color: #eff6ff;
-    classDef dbNode   fill: #03206d,stroke: #20356f,stroke-width:2px,color: #eff6ff;
+    classDef stepNode fill:#1e3a8a,stroke:#42568d,stroke-width:1.5px,color:#eff6ff;
+    classDef ioNode   fill:#3c66d8,stroke:#6082df,stroke-width:1.5px,color:#eff6ff;
+    classDef toolNode fill:#0f172a,stroke:#202632,stroke-width:1.5px,color:#eff6ff;
+    classDef dbNode   fill:#03206d,stroke:#20356f,stroke-width:2px,color:#eff6ff;
 
     class B,C,E,G stepNode;
     class A,H ioNode;
