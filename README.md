@@ -25,7 +25,7 @@ The system executes a strictly typed, 4-stage pipeline that guarantees SQL synta
 flowchart TD
     A([User Prompt]) --> B[Step 1 <br/>Semantic Analysis: <br/><i>guardrailAgent</i>]
     
-    B -->|Sanitized & Intent Verified| C[Step 2 <br/>SQL Builder: <br/><i>sqlGenAgent</i>]
+    B -->| Sanitized & Intent Verified | C[Step 2 <br/>SQL Builder: <br/><i>sqlGenAgent</i>]
     
     C --> D1[DealershipLocationsTool]
     C --> D2[VehicleCatalogMasterTool]
@@ -39,14 +39,14 @@ flowchart TD
 
     
     
-    F -->|Raw Relational Rows| G[Step 4 <br/>Response Formatter: <br/><i>responderAgent</i>]
+    F -->| Raw Relational Rows | G[Step 4 <br/>Response Formatter: <br/><i>responderAgent</i>]
     
     G --> H([Conversational Answer])
 
-    classDef stepNode fill:#1e3a8a,stroke:#3b82f6,stroke-width:1.5px,color:#eff6ff;
-    classDef ioNode   fill:#0369a1,stroke:#38bdf8,stroke-width:1.5px,color:#f0f9ff;
-    classDef toolNode fill:#0f172a,stroke:#60a5fa,stroke-width:1.5px,color:#f8fafc;
-    classDef dbNode   fill:#1d4ed8,stroke:#93c5fd,stroke-width:2px,color:#ffffff;
+    classDef stepNode fill: #1e3a8a,stroke: #42568d,stroke-width:1.5px,color: #eff6ff;
+    classDef ioNode   fill: #3c66d8,stroke: #6082df,stroke-width:1.5px,color: #eff6ff;
+    classDef toolNode fill: #0f172a,stroke: #202632,stroke-width:1.5px,color: #eff6ff;
+    classDef dbNode   fill: #03206d,stroke: #20356f,stroke-width:2px,color: #eff6ff;
 
     class B,C,E,G stepNode;
     class A,H ioNode;
