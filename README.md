@@ -8,12 +8,15 @@ A deterministic, multi-agent AI system built on the **Mastra framework** designe
 
 ---
 
-> [!TIP]
-> ### TL;DR
-> * **What it is:** A Node.js backend workflow answering car dealership questions using natural language.
-> * **How it works:** Translates questions into deterministic SQL queries against Microsoft SQL Server.
-> * **Architecture:** 4-step sequential workflow coordinating 3 agents and 3 tools.
-> * **Tech Stack:** Mastra, Node.js, Microsoft SQL Server, OpenRouter LLMs.            
+<div align="left" style="border: 1px solid #1e3a8a; border-radius: 8px; padding: 16px; background-color: #161b22; margin-bottom: 20px;">
+  <h4 style="margin-top: 0;"><b>TL;DR</b></h4>
+  <ul>
+    <li><b>What it is:</b> A Node.js backend workflow answering car dealership questions using natural language.</li>
+    <li><b>How it works:</b> Translates questions into deterministic SQL queries against Microsoft SQL Server.</li>
+    <li><b>Architecture:</b> 4-step sequential workflow coordinating 3 agents and 3 schema-aware tools.</li>
+    <li><b>Tech Stack:</b> Mastra, Node.js, Microsoft SQL Server, OpenRouter LLMs.</li>
+  </ul>
+</div>            
 
 ---
 
@@ -43,9 +46,9 @@ flowchart TD
     
     G --> H([Conversational Answer])
 
-    classDef agent fill:#1f2937,stroke:#374151,stroke-width:1.5px,color:#f9fafb;
-    classDef tool  fill:#111827,stroke:#4b5563,stroke-width:1.5px,color:#e5e7eb;
-    classDef step  fill:#0f172a,stroke:#64748b,stroke-width:1.5px,color:#f8fafc;
+    classDef agent fill:#1e3a8a,stroke:#3b82f6,stroke-width:1.5px,color:#eff6ff;
+    classDef tool  fill:#0f172a,stroke:#38bdf8,stroke-width:1.5px,color:#f0f9ff;
+    classDef step  fill:#172554,stroke:#60a5fa,stroke-width:1.5px,color:#ffffff;
 
     class B,C,G agent;
     class D1,D2,D3 tool;
